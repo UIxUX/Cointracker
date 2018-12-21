@@ -6,4 +6,13 @@
 //  Copyright © 2018 Org. All rights reserved.
 //
 
-import Foundation
+enum PriceRequestType: String {
+    case Historic
+    case Current
+}
+
+enum Period: String {
+    case Daily
+    case Monthly
+    case Alltime
+}
