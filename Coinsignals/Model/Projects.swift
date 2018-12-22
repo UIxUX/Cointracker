@@ -9,7 +9,7 @@
 import UIKit
 
 
-enum Project: String {
+enum Project: String, Codable {
     case BTC
     case ETH
     case LTC

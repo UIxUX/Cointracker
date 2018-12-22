@@ -16,6 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let rate = RateMyApp.sharedInstance
+        rate.debug = false
+        
+        DispatchQueue.main.async(execute: {
+            rate.trackAppUsage()
+        })
+        
+        if rate.isFirstTime() || rate.debug == true {
+            print("First Time!")
+            /// TODO: Get ALL Data externally & save it locally
+            
+        } else {
+            print("Not first Time!")
+        }
+        
         return true
     }
 
