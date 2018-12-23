@@ -160,7 +160,7 @@ class ProjectDetailViewController: UITableViewController {
             ///ProjectDetailSimpleChartViewCell
             cell = tableView.dequeueReusableCell(withIdentifier: "ProjectDetailSimpleChartViewCell", for: indexPath)
             if let _cell = cell as? ProjectDetailSimpleChartViewCell {
-                
+                _cell.delegate = self
                 if let locallySavedHistoricData = DataAPI.shared.getHistoricPriceData(project: selectedProject) {
                     drawChartFromLocalData(period: selectedPeriod, aggregatedHistoricPriceData: locallySavedHistoricData, chartView: _cell.historicPricesChartView)
                 }
@@ -203,4 +203,15 @@ class ProjectDetailViewController: UITableViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+}
+
+
+
+extension ProjectDetailViewController: ProjectDetailSimpleChartViewCellDelegate {
+    func notifyPeriodButtonPressed(period: Period) {
+        selectedPeriod = period
+        drawChartFromExternalData(period: selectedPeriod)
+    }
+    
+    
 }
