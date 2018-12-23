@@ -67,7 +67,11 @@ class Webservice {
                         let decoder = ApiDecoder()
                         
                         let data = try decoder.decode(CurrentTickerPriceData.self, from: json)
-                        completion(data)
+                        
+                        DispatchQueue.main.async(execute: {
+//                            print(data)
+                            completion(data)
+                        })
 
                     } catch {
                         print("unable to decode currenttickerpricedata")

@@ -116,8 +116,6 @@
 				3F7EF53621CD49D600CD394D /* Model */,
 				3F7EF53521CD49CA00CD394D /* Extensions & Utils */,
 				3F7EF52321CD481800CD394D /* AppDelegate.swift */,
-				B34B1AF121CF1E3E00EF8528 /* ProjectDetailViewController.swift */,
-				3F7EF52521CD481800CD394D /* ViewController.swift */,
 				3F7EF52721CD481800CD394D /* Main.storyboard */,
 				3F7EF52C21CD481A00CD394D /* LaunchScreen.storyboard */,
 				3F7EF52F21CD481A00CD394D /* Info.plist */,
@@ -164,6 +162,8 @@
 		3F7EF53821CD49F900CD394D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B34B1AF121CF1E3E00EF8528 /* ProjectDetailViewController.swift */,
+				3F7EF52521CD481800CD394D /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

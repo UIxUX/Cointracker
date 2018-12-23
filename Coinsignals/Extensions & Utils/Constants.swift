@@ -6,3 +6,6 @@
 //  Copyright © 2018 Org. All rights reserved.
 //
 
+struct Constants {
+     static let updatePriceInSeconds: Double = 10
+}

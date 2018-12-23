@@ -13,12 +13,60 @@ class ProjectDetailViewController: UITableViewController {
     var selectedProject: Project!
     var selectedPeriod: Period!
     
+    var headerCell: ProjectDetailHeaderViewCell?
+    var projectDetailSimpleOverViewCell: ProjectDetailSimpleOverViewCell?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         
         selectedProject = .BTC
         selectedPeriod = .Alltime
+        
+        /// Getting locally Saved value - to quickly set the values while waiting for External Data Request
+        if let locallySavedValue = DataAPI.shared.getLocalCurrentTickerPriceData(project: selectedProject) {
+            self.setCurrentPriceData(currentPriceData: locallySavedValue)
+        }
+        
+        /// Async Retrieval of external Data to get more Actualized Data
+        DataAPI.shared.getExternalCurrentTickerPriceData(project: selectedProject, completion: {
+            (currentPriceData) -> Void in
+            self.setCurrentPriceData(currentPriceData: currentPriceData)
+        })
+        
+        /// Starts Subscription to Price Ticker
+        startSubscribingToCurrentPrice()
+        
+    }
+    
+    fileprivate func startSubscribingToCurrentPrice() {
+        DataAPI.shared.startExternalCurrentTickerPriceDataSubscription(project: selectedProject, completion: {
+            (currentPriceData) -> Void in
+            self.setCurrentPriceData(currentPriceData: currentPriceData)
+        })
+    }
+    
+    private func setCurrentPriceData(currentPriceData: CurrentTickerPriceData) {
+        if self.projectDetailSimpleOverViewCell != nil {
+            print("setting priceLabel...")
+            self.projectDetailSimpleOverViewCell?.setPriceLabel(string: "\(currentPriceData.last)$")
+            
+            switch (self.selectedPeriod!) {
+            case .Alltime:
+                self.projectDetailSimpleOverViewCell?.setBubbleText(string: "\(currentPriceData.changes.percent.year)% 1Y", bubble: ((self.projectDetailSimpleOverViewCell?.priceChangedButton)!))
+                break
+            case .Daily:
+                self.projectDetailSimpleOverViewCell?.setBubbleText(string: "\(currentPriceData.changes.percent.day)% 1D", bubble: ((self.projectDetailSimpleOverViewCell?.priceChangedButton)!))
+                break
+            case .Monthly:
+                self.projectDetailSimpleOverViewCell?.setBubbleText(string: "\(currentPriceData.changes.percent.month)% 1M", bubble: ((self.projectDetailSimpleOverViewCell?.priceChangedButton)!))
+                break
+            }
+            
+            
+        } else {
+            print("self.projectDetailSimpleOverViewCell == nil")
+        }
     }
     
     
@@ -46,6 +94,7 @@ class ProjectDetailViewController: UITableViewController {
             if let _cell = cell as? ProjectDetailHeaderViewCell {
                 _cell.setProjectLabel(string: "BITCOIN")
                 _cell.projectImageViewLabel.text = selectedProject.unicode()
+                headerCell = _cell
             }
             break
         case 1:
@@ -56,6 +105,7 @@ class ProjectDetailViewController: UITableViewController {
                 _cell.setBubbleText(string: "+15%", bubble: _cell.priceChangedButton)
                 _cell.setBubbleText(string: "OVERSOLD", bubble: _cell.rsiValueButton)
                 _cell.setBubbleText(string: "GREAT", bubble: _cell.sentimentValueButton)
+                projectDetailSimpleOverViewCell = _cell
             }
             break
         default:
