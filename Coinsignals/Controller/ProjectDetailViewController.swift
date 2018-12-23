@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class ProjectDetailViewController: UITableViewController {
     
@@ -15,57 +16,99 @@ class ProjectDetailViewController: UITableViewController {
     
     var headerCell: ProjectDetailHeaderViewCell?
     var projectDetailSimpleOverViewCell: ProjectDetailSimpleOverViewCell?
+    var projectDetailSimpleChartViewCell: ProjectDetailSimpleChartViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         
         selectedProject = .BTC
-        selectedPeriod = .Alltime
-        
-        /// Getting locally Saved value - to quickly set the values while waiting for External Data Request
-        if let locallySavedValue = DataAPI.shared.getLocalCurrentTickerPriceData(project: selectedProject) {
-            self.setCurrentPriceData(currentPriceData: locallySavedValue)
-        }
+        selectedPeriod = .Daily
         
         /// Async Retrieval of external Data to get more Actualized Data
         DataAPI.shared.getExternalCurrentTickerPriceData(project: selectedProject, completion: {
             (currentPriceData) -> Void in
-            self.setCurrentPriceData(currentPriceData: currentPriceData)
+            self.setCurrentPriceData(currentPriceData: currentPriceData, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
         })
         
         /// Starts Subscription to Price Ticker
         startSubscribingToCurrentPrice()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
     }
     
     fileprivate func startSubscribingToCurrentPrice() {
         DataAPI.shared.startExternalCurrentTickerPriceDataSubscription(project: selectedProject, completion: {
             (currentPriceData) -> Void in
-            self.setCurrentPriceData(currentPriceData: currentPriceData)
+            self.setCurrentPriceData(currentPriceData: currentPriceData, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
         })
     }
     
-    private func setCurrentPriceData(currentPriceData: CurrentTickerPriceData) {
-        if self.projectDetailSimpleOverViewCell != nil {
-            print("setting priceLabel...")
-            self.projectDetailSimpleOverViewCell?.setPriceLabel(string: "\(currentPriceData.last)$")
+    private func setCurrentPriceData(currentPriceData: CurrentTickerPriceData, _projectDetailSimpleOverViewCell: ProjectDetailSimpleOverViewCell?) {
+        if _projectDetailSimpleOverViewCell != nil {
+            _projectDetailSimpleOverViewCell!.setPriceLabel(string: "\(currentPriceData.last)$")
             
             switch (self.selectedPeriod!) {
             case .Alltime:
-                self.projectDetailSimpleOverViewCell?.setBubbleText(string: "\(currentPriceData.changes.percent.year)% 1Y", bubble: ((self.projectDetailSimpleOverViewCell?.priceChangedButton)!))
+                let percent = currentPriceData.changes.percent.year
+                let overZero = percent >= 0.0 ? true : false
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "\(percent)% 1Y", bubble: ((_projectDetailSimpleOverViewCell!.priceChangedButton)!), success: overZero)
                 break
             case .Daily:
-                self.projectDetailSimpleOverViewCell?.setBubbleText(string: "\(currentPriceData.changes.percent.day)% 1D", bubble: ((self.projectDetailSimpleOverViewCell?.priceChangedButton)!))
+                let percent = currentPriceData.changes.percent.day
+                let overZero = percent >= 0.0 ? true : false
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "\(percent)% 1D", bubble: ((_projectDetailSimpleOverViewCell!.priceChangedButton)!), success: overZero)
+                
                 break
             case .Monthly:
-                self.projectDetailSimpleOverViewCell?.setBubbleText(string: "\(currentPriceData.changes.percent.month)% 1M", bubble: ((self.projectDetailSimpleOverViewCell?.priceChangedButton)!))
+                let percent = currentPriceData.changes.percent.month
+                let overZero = percent >= 0.0 ? true : false
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "\(percent)% 1M", bubble: ((_projectDetailSimpleOverViewCell!.priceChangedButton)!), success: overZero)
+                
                 break
             }
+
+        }
+    }
+    
+    fileprivate func drawChartFromExternalData(period: Period) {
+        if projectDetailSimpleChartViewCell != nil {
+            var chartPrices = [Double]()
+
+            DataAPI.shared.getExternalPriceHistoryData(project: selectedProject, period: period, completion: {
+                (historicPrices) -> Void in
+                chartPrices = historicPrices.flatMap({ $0.average })
+                let chartView = ChartView(chartView: self.projectDetailSimpleChartViewCell!.historicPricesChartView, chartValues: chartPrices)
+                chartView.drawChart()
+
+            })
+        }
+    }
+    
+    fileprivate func drawChartFromLocalData(period: Period, aggregatedHistoricPriceData: AggregatedHistoricPriceData, chartView: LineChartView) {
+            var chartPrices = [Double]()
             
+            switch (self.selectedPeriod!) {
+            case .Daily:
+                chartPrices = aggregatedHistoricPriceData.dailyHistoryArray.flatMap({ $0.average })
+                break
+            case .Monthly:
+                chartPrices = aggregatedHistoricPriceData.monthlyHistoryArray.flatMap({ $0.average })
+                break
+            case .Alltime:
+                chartPrices = aggregatedHistoricPriceData.alltimeHistoryArray.flatMap({ $0.average })
+                break
+            }
+            let chartView = ChartView(chartView: chartView, chartValues: chartPrices)
+            chartView.drawChart()
+    }
+    
+    fileprivate func drawChartFromLocalData(period: Period) {
+        if projectDetailSimpleChartViewCell != nil {
+            var chartPrices = [Double]()
             
-        } else {
-            print("self.projectDetailSimpleOverViewCell == nil")
+            /// TODO
         }
     }
     
@@ -101,11 +144,29 @@ class ProjectDetailViewController: UITableViewController {
             ///ProjectDetailSimpleOverViewCell
             cell = tableView.dequeueReusableCell(withIdentifier: "ProjectDetailSimpleOverViewCell", for: indexPath)
             if let _cell = cell as? ProjectDetailSimpleOverViewCell {
-               _cell.setPriceLabel(string: "4132$")
+                _cell.setPriceLabel(string: "4132$")
                 _cell.setBubbleText(string: "+15%", bubble: _cell.priceChangedButton)
+                
+                if let locallySavedTickerData = DataAPI.shared.getLocalCurrentTickerPriceData(project: selectedProject) {
+                    self.setCurrentPriceData(currentPriceData: locallySavedTickerData, _projectDetailSimpleOverViewCell: _cell)
+                }
+               
                 _cell.setBubbleText(string: "OVERSOLD", bubble: _cell.rsiValueButton)
                 _cell.setBubbleText(string: "GREAT", bubble: _cell.sentimentValueButton)
                 projectDetailSimpleOverViewCell = _cell
+            }
+            break
+        case 2:
+            ///ProjectDetailSimpleChartViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "ProjectDetailSimpleChartViewCell", for: indexPath)
+            if let _cell = cell as? ProjectDetailSimpleChartViewCell {
+                
+                if let locallySavedHistoricData = DataAPI.shared.getHistoricPriceData(project: selectedProject) {
+                    drawChartFromLocalData(period: selectedPeriod, aggregatedHistoricPriceData: locallySavedHistoricData, chartView: _cell.historicPricesChartView)
+                }
+                
+                projectDetailSimpleChartViewCell = _cell
+                drawChartFromExternalData(period: selectedPeriod)
             }
             break
         default:
@@ -135,7 +196,7 @@ class ProjectDetailViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     //Hides status bar

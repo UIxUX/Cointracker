@@ -58,12 +58,12 @@ class ProjectDetailSimpleOverViewCell: UITableViewCell {
         priceLabel.attributedText = attributedString
     }
     
-    func setBubbleText(string: String, bubble: UIButton) {
-
+    func setBubbleText(string: String, bubble: UIButton, success: Bool? = true) {
+        let successColor = success == true ? UIColor.greenSuccess : UIColor.redAlert
         let attributedString = NSMutableAttributedString(string: string)
         attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(1.3), range: NSRange(location: 0, length: attributedString.length))
         attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "Helvetica-Bold", size: 9.0)!, range: NSMakeRange(0, (attributedString.length)))
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.greenSuccess, range: NSMakeRange(0, (attributedString.length)))
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: successColor, range: NSMakeRange(0, (attributedString.length)))
         
         bubble.setAttributedTitle(attributedString, for: .normal)
     }

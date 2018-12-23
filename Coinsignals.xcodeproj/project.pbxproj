@@ -32,6 +32,8 @@
 		B34B1AF621CF297500EF8528 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AF521CF297500EF8528 /* Extensions.swift */; };
 		B34B1AF821CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AF721CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift */; };
 		B34B1AFA21CF455800EF8528 /* ForceTouchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AF921CF455800EF8528 /* ForceTouchButton.swift */; };
+		B34B1AFC21CFF91100EF8528 /* ProjectDetailSimpleChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AFB21CFF91100EF8528 /* ProjectDetailSimpleChartViewCell.swift */; };
+		B34B1AFE21CFFD0D00EF8528 /* HistoricPriceChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AFD21CFFD0D00EF8528 /* HistoricPriceChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		B34B1AF521CF297500EF8528 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B34B1AF721CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailSimpleOverViewCell.swift; sourceTree = "<group>"; };
 		B34B1AF921CF455800EF8528 /* ForceTouchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceTouchButton.swift; sourceTree = "<group>"; };
+		B34B1AFB21CFF91100EF8528 /* ProjectDetailSimpleChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailSimpleChartViewCell.swift; sourceTree = "<group>"; };
+		B34B1AFD21CFFD0D00EF8528 /* HistoricPriceChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricPriceChartView.swift; sourceTree = "<group>"; };
 		DB34929F9730F1E6AC9710FA /* Pods-Coinsignals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsignals.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsignals/Pods-Coinsignals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +159,8 @@
 				B34B1AF321CF23E500EF8528 /* ProjectDetailHeaderViewCell.swift */,
 				B34B1AF721CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift */,
 				B34B1AF921CF455800EF8528 /* ForceTouchButton.swift */,
+				B34B1AFB21CFF91100EF8528 /* ProjectDetailSimpleChartViewCell.swift */,
+				B34B1AFD21CFFD0D00EF8528 /* HistoricPriceChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -297,10 +303,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Coinsignals/Pods-Coinsignals-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -314,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34B1AFE21CFFD0D00EF8528 /* HistoricPriceChartView.swift in Sources */,
 				3F7EF52621CD481800CD394D /* ViewController.swift in Sources */,
 				B34B1AF621CF297500EF8528 /* Extensions.swift in Sources */,
 				3F7EF52421CD481800CD394D /* AppDelegate.swift in Sources */,
@@ -328,6 +337,7 @@
 				B34B1AE521CEB0F400EF8528 /* RsiData.swift in Sources */,
 				B34B1AE721CEB2BD00EF8528 /* CurrentTickerPriceData.swift in Sources */,
 				3F7EF53D21CD4B2F00CD394D /* Constants.swift in Sources */,
+				B34B1AFC21CFF91100EF8528 /* ProjectDetailSimpleChartViewCell.swift in Sources */,
 				3F7EF54521CD5A5A00CD394D /* PriceRequestType.swift in Sources */,
 				B34B1AFA21CF455800EF8528 /* ForceTouchButton.swift in Sources */,
 				B34B1AEF21CF0BBE00EF8528 /* ApiDecoder.swift in Sources */,

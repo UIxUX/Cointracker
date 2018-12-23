@@ -39,7 +39,10 @@ class Webservice {
                         }
                         if data != nil {
                             data!.sort(by: {$0.time < $1.time})
-                            completion(data!)
+                            DispatchQueue.main.async(execute: {
+                                completion(data!)
+                            })
+                            
                         }
                     } catch {
                         completion([])

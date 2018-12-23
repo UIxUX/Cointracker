@@ -19,9 +19,21 @@ final class DataAPI {
         
         var pManager = PersistencyManager(allCurrentTickerPriceData: allCurrentTickerPriceData, allHistoricPriceData: allHistoricPriceData, allSentimentData: allSentimentData, allRsiData: allRsiData)
         
+        /// When initiating PersistencyManager, we look for locally saved objects that can be assessed
+        
         pManager.retrieveSavedAllCurrentTickerPriceData(completion: {(savedAllCurrentTickerPriceData) -> Void in
             if savedAllCurrentTickerPriceData != nil {
                 pManager.updateAllCurrentTickerPriceData(allCurrentTickerPriceData: savedAllCurrentTickerPriceData!)
+            } else {
+                print("savedAllCurrentTickerPriceData == nil")
+            }
+        })
+        
+        pManager.retrieveSavedAllHistoricPriceData(completion: {(savedAllHistoricPriceData) -> Void in
+            if savedAllHistoricPriceData != nil {
+                pManager.updateAllHistoricPriceData(allHistoricPriceData: savedAllHistoricPriceData!)
+            } else {
+                print("savedAllHistoricPriceData == nil")
             }
         })
         
@@ -51,6 +63,7 @@ final class DataAPI {
         
         webservice.getCurrentPriceData(dataProvider: .BitcoinAverage, project: project, completion: { currentPriceData -> Void in
             completion(currentPriceData)
+            /// Update and Save
             self.updateLocalPriceData(project: project, currentTickerPriceData: currentPriceData)
             self.saveAllCurrentTickerPriceDataLocally()
         } )
@@ -76,6 +89,22 @@ final class DataAPI {
     }
     
     
+    
+    /// - Mark: Simply get Price History for Period
+    
+    func getExternalPriceHistoryData(project: Project, period: Period, completion: @escaping (([History]) -> Void)) {
+        let webservice = Webservice()
+        
+        webservice.getHistoricPriceData(dataProvider: .BitcoinAverage, project: project, period: period, completion: {
+            (historicData) -> Void in
+            completion(historicData)
+            /// Update and Save
+            self.updateLocalHistoricPriceData(project: project, priceHistory: historicData, period: period)
+            self.saveAllHistoricPriceDataLocally()
+        })
+    }
+    
+    
     /// - Mark: Get / Set / Locally Save HISTORIC Price Data
 
     func getAllHistoricPriceData() -> AllHistoricPriceData {
@@ -88,6 +117,10 @@ final class DataAPI {
     
     func updateLocalHistoricPriceData(project: Project, aggregatedHistoricPriceData: AggregatedHistoricPriceData) {
         return persistencyManager.updateLocalHistoricPriceData(project: project, aggregatedHistoricPriceData: aggregatedHistoricPriceData)
+    }
+    
+    func updateLocalHistoricPriceData(project: Project, priceHistory: [History], period: Period) {
+        persistencyManager.updateLocalHistoricPriceData(project: project, history: priceHistory, period: period)
     }
     
     func saveAllHistoricPriceDataLocally() {
@@ -177,7 +210,7 @@ final class PersistencyManager {
     }
     
     fileprivate func retrieveSavedAllCurrentTickerPriceData(completion: @escaping (AllCurrentTickerPriceData?) -> Void) {
-        DispatchQueue.main.async(execute: {
+//        DispatchQueue.main.async(execute: {
             print("Retrieving Locally Saved Ticker Price Data")
             var priceData: AllCurrentTickerPriceData?
             if let data = UserDefaults.standard.value(forKey: "allCurrentTickerPriceData") as? Data {
@@ -189,11 +222,12 @@ final class PersistencyManager {
                 print("FAILURE: Retrieving Locally Saved Ticker Price Data")
                 completion(priceData)
             }
-        })
+//        })
     }
     
     /// - Mark: Get / Set / Locally Save HISTORIC Price Data
     
+    /// Not used atm
     fileprivate func getAllHistoricPriceData() -> AllHistoricPriceData {
         return allHistoricPriceData
     }
@@ -202,12 +236,61 @@ final class PersistencyManager {
         return allHistoricPriceData.projectPriceDict[project]
     }
     
+    /// Not used atm
     fileprivate func updateLocalHistoricPriceData(project: Project, aggregatedHistoricPriceData: AggregatedHistoricPriceData) {
         allHistoricPriceData.projectPriceDict.updateValue(aggregatedHistoricPriceData, forKey: project)
     }
     
+    fileprivate func updateAllHistoricPriceData(allHistoricPriceData: AllHistoricPriceData) {
+        self.allHistoricPriceData = allHistoricPriceData
+    }
+    
+    fileprivate func updateLocalHistoricPriceData(project: Project, history: [History], period: Period) {
+
+        var projectPriceDict = allHistoricPriceData.projectPriceDict
+        
+        /// If it doesn't contain key, we'll update it
+        if allHistoricPriceData.projectPriceDict[project] == nil {
+            let newAggregatedHistory = AggregatedHistoricPriceData()
+            allHistoricPriceData.projectPriceDict.updateValue( newAggregatedHistory, forKey: project)
+        }
+        var aggregatedHistoryForProject = allHistoricPriceData.projectPriceDict[project]
+        
+        switch (period) {
+        case .Alltime:
+            aggregatedHistoryForProject?.alltimeHistoryArray = history as! [AlltimeHistory]
+            break
+        case .Daily:
+            aggregatedHistoryForProject?.dailyHistoryArray = history as! [DailyHistory]
+            break
+        case .Monthly:
+            aggregatedHistoryForProject?.monthlyHistoryArray = history as! [MonthlyHistory]
+            break
+        }
+        allHistoricPriceData.projectPriceDict.updateValue(aggregatedHistoryForProject!, forKey: project)
+    }
+    
     fileprivate func saveAllHistoricPriceDataLocally() {
-        /// TODO
+        DispatchQueue.main.async(execute: {
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(self.allHistoricPriceData), forKey: "allHistoricPriceData")
+            print("allHistoricPriceData locally saved.")
+        })
+    }
+    
+    fileprivate func retrieveSavedAllHistoricPriceData(completion: @escaping (AllHistoricPriceData?) -> Void) {
+//        DispatchQueue.main.async(execute: {
+            print("Retrieving Locally Saved Historic Price Data")
+            var priceData: AllHistoricPriceData?
+            if let data = UserDefaults.standard.value(forKey: "allHistoricPriceData") as? Data {
+                print("SUCCESS: Retrieving Locally Saved Historic Price Data")
+                priceData = try? PropertyListDecoder().decode(AllHistoricPriceData.self, from: data)
+                print("PRICEDATA: \(priceData)")
+                completion(priceData)
+            } else {
+                print("FAILURE: Retrieving Locally Saved Historic Price Data")
+                completion(priceData)
+            }
+//        })
     }
     
     
@@ -279,7 +362,6 @@ final class CurrentPriceSubscriptionManager {
     func startSubscribingToPriceData(project: Project, completion: @escaping ((CurrentTickerPriceData) -> Void)) {
         ///Different or new Project - stop deactivate Subscription, start new one.
         if project != currentlyObservedProject {
-            print("halligalli")
             deactivateSubscriptionAndDeleteCallbacks()
             currentlyObservedProject = project
             callbacks.append(completion)

@@ -21,6 +21,12 @@ struct AggregatedHistoricPriceData: Codable {
     var dailyHistoryArray: [DailyHistory]
     var monthlyHistoryArray: [MonthlyHistory]
     var alltimeHistoryArray: [AlltimeHistory]
+    
+    init() {
+        dailyHistoryArray = [DailyHistory]()
+        monthlyHistoryArray = [MonthlyHistory]()
+        alltimeHistoryArray = [AlltimeHistory]()
+    }
 }
 
 protocol History: Codable {

@@ -115,8 +115,8 @@
                                             </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Rsi:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zx8-n1-Ytf">
-                                            <rect key="frame" x="40" y="99.5" width="22.5" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Rsi 1D:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zx8-n1-Ytf">
+                                            <rect key="frame" x="40" y="99.5" width="43" height="21"/>
                                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -181,6 +181,43 @@
                                     <outlet property="rsiValueButton" destination="Hv2-Ab-GO3" id="ra6-ca-M3V"/>
                                     <outlet property="sentimentLabel" destination="zmX-2V-BAu" id="rab-HJ-VGi"/>
                                     <outlet property="sentimentValueButton" destination="XT1-5o-uwI" id="A5g-Ly-V6g"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ProjectDetailSimpleChartViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProjectDetailSimpleChartViewCell" rowHeight="232" id="0xs-3d-6wm" userLabel="ProjectDetailSimpleChartViewCell" customClass="ProjectDetailSimpleChartViewCell" customModule="Coinsignals" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="416" width="375" height="232"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0xs-3d-6wm" id="Nv4-cX-UVU">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="231.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="LineChartView" translatesAutoresizingMaskIntoConstraints="NO" id="bFZ-M2-jP5" userLabel="HistoricPriceChart" customClass="LineChartView" customModule="Charts">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
+                                            <color key="backgroundColor" red="1" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="J1D-OD-vE8"/>
+                                            </constraints>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fz6-5F-mpR">
+                                            <rect key="frame" x="0.0" y="199" width="375" height="26"/>
+                                            <color key="backgroundColor" red="0.0" green="0.80152644230000003" blue="0.60923076919999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="fz6-5F-mpR" secondAttribute="bottom" constant="6.5" id="CSU-1g-EMB"/>
+                                        <constraint firstItem="fz6-5F-mpR" firstAttribute="top" secondItem="bFZ-M2-jP5" secondAttribute="bottom" constant="1" id="VX0-gF-Mi7"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bFZ-M2-jP5" firstAttribute="leading" secondItem="0xs-3d-6wm" secondAttribute="leading" id="9Z0-mW-Qmh"/>
+                                    <constraint firstItem="fz6-5F-mpR" firstAttribute="leading" secondItem="0xs-3d-6wm" secondAttribute="leading" id="AHd-i4-d26"/>
+                                    <constraint firstAttribute="trailing" secondItem="bFZ-M2-jP5" secondAttribute="trailing" id="ZsH-TF-vHP"/>
+                                    <constraint firstAttribute="trailing" secondItem="fz6-5F-mpR" secondAttribute="trailing" id="bcz-wm-3lG"/>
+                                    <constraint firstItem="bFZ-M2-jP5" firstAttribute="top" secondItem="0xs-3d-6wm" secondAttribute="top" id="cEy-0e-mXR"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="historicPricesChartView" destination="bFZ-M2-jP5" id="iAm-U2-Olm"/>
+                                    <outlet property="stackView" destination="fz6-5F-mpR" id="g2w-MI-DzM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
