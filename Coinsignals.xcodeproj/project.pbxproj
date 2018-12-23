@@ -27,6 +27,11 @@
 		B34B1AEB21CEF4FE00EF8528 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B34B1AEA21CEF4FE00EF8528 /* Alamofire.framework */; };
 		B34B1AED21CEFEE300EF8528 /* DataProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AEC21CEFEE300EF8528 /* DataProviders.swift */; };
 		B34B1AEF21CF0BBE00EF8528 /* ApiDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AEE21CF0BBE00EF8528 /* ApiDecoder.swift */; };
+		B34B1AF221CF1E3E00EF8528 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AF121CF1E3E00EF8528 /* ProjectDetailViewController.swift */; };
+		B34B1AF421CF23E500EF8528 /* ProjectDetailHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AF321CF23E500EF8528 /* ProjectDetailHeaderViewCell.swift */; };
+		B34B1AF621CF297500EF8528 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AF521CF297500EF8528 /* Extensions.swift */; };
+		B34B1AF821CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AF721CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift */; };
+		B34B1AFA21CF455800EF8528 /* ForceTouchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B1AF921CF455800EF8528 /* ForceTouchButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +58,11 @@
 		B34B1AEA21CEF4FE00EF8528 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B34B1AEC21CEFEE300EF8528 /* DataProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviders.swift; sourceTree = "<group>"; };
 		B34B1AEE21CF0BBE00EF8528 /* ApiDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDecoder.swift; sourceTree = "<group>"; };
+		B34B1AF121CF1E3E00EF8528 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
+		B34B1AF321CF23E500EF8528 /* ProjectDetailHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailHeaderViewCell.swift; sourceTree = "<group>"; };
+		B34B1AF521CF297500EF8528 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B34B1AF721CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailSimpleOverViewCell.swift; sourceTree = "<group>"; };
+		B34B1AF921CF455800EF8528 /* ForceTouchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceTouchButton.swift; sourceTree = "<group>"; };
 		DB34929F9730F1E6AC9710FA /* Pods-Coinsignals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsignals.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsignals/Pods-Coinsignals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +116,7 @@
 				3F7EF53621CD49D600CD394D /* Model */,
 				3F7EF53521CD49CA00CD394D /* Extensions & Utils */,
 				3F7EF52321CD481800CD394D /* AppDelegate.swift */,
+				B34B1AF121CF1E3E00EF8528 /* ProjectDetailViewController.swift */,
 				3F7EF52521CD481800CD394D /* ViewController.swift */,
 				3F7EF52721CD481800CD394D /* Main.storyboard */,
 				3F7EF52C21CD481A00CD394D /* LaunchScreen.storyboard */,
@@ -120,6 +131,8 @@
 				3F7EF53C21CD4B2F00CD394D /* Constants.swift */,
 				3F7EF53F21CD4B5100CD394D /* Styling.swift */,
 				B34B1AEE21CF0BBE00EF8528 /* ApiDecoder.swift */,
+				B34B1AE821CED61600EF8528 /* RateMyApp.swift */,
+				B34B1AF521CF297500EF8528 /* Extensions.swift */,
 			);
 			path = "Extensions & Utils";
 			sourceTree = "<group>";
@@ -141,6 +154,9 @@
 		3F7EF53721CD49E800CD394D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B34B1AF321CF23E500EF8528 /* ProjectDetailHeaderViewCell.swift */,
+				B34B1AF721CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift */,
+				B34B1AF921CF455800EF8528 /* ForceTouchButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -148,7 +164,6 @@
 		3F7EF53821CD49F900CD394D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B34B1AE821CED61600EF8528 /* RateMyApp.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -300,20 +315,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7EF52621CD481800CD394D /* ViewController.swift in Sources */,
+				B34B1AF621CF297500EF8528 /* Extensions.swift in Sources */,
 				3F7EF52421CD481800CD394D /* AppDelegate.swift in Sources */,
 				3F7EF54221CD51FE00CD394D /* Projects.swift in Sources */,
 				3F7EF54721CD5DA000CD394D /* Webservice.swift in Sources */,
 				B34B1AE021CEA35000EF8528 /* HistoricPriceData.swift in Sources */,
 				B34B1ADE21CEA0C600EF8528 /* DataAPI.swift in Sources */,
 				B34B1AED21CEFEE300EF8528 /* DataProviders.swift in Sources */,
+				B34B1AF421CF23E500EF8528 /* ProjectDetailHeaderViewCell.swift in Sources */,
 				3F7EF54021CD4B5100CD394D /* Styling.swift in Sources */,
 				B34B1AE221CEAEB000EF8528 /* SentimentData.swift in Sources */,
 				B34B1AE521CEB0F400EF8528 /* RsiData.swift in Sources */,
 				B34B1AE721CEB2BD00EF8528 /* CurrentTickerPriceData.swift in Sources */,
 				3F7EF53D21CD4B2F00CD394D /* Constants.swift in Sources */,
 				3F7EF54521CD5A5A00CD394D /* PriceRequestType.swift in Sources */,
+				B34B1AFA21CF455800EF8528 /* ForceTouchButton.swift in Sources */,
 				B34B1AEF21CF0BBE00EF8528 /* ApiDecoder.swift in Sources */,
 				B34B1AE921CED61600EF8528 /* RateMyApp.swift in Sources */,
+				B34B1AF221CF1E3E00EF8528 /* ProjectDetailViewController.swift in Sources */,
+				B34B1AF821CF374F00EF8528 /* ProjectDetailSimpleOverViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

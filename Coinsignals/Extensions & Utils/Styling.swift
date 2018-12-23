@@ -12,7 +12,8 @@ extension UIColor {
     
     // MARK: - Includes relevant colors for the UI
     
-    public static var blueBackground : UIColor { return UIColor(red: 18/255, green: 42/255, blue: 87/255, alpha: 1.0) }
+    public static var blueBackgroundTop : UIColor { return UIColor(red: 18/255, green: 42/255, blue: 87/255, alpha: 1.0) }
+    public static var blueBackgroundBottom : UIColor { return UIColor(red: 12/255, green: 21/255, blue: 39/255, alpha: 1.0) }
     public static var blueCardBackground : UIColor { return UIColor(red: 26/255, green: 48/255, blue: 90/255, alpha: 1.0) }
     public static var greenSuccess : UIColor { return UIColor(red: 124/255, green: 224/255, blue: 181/255, alpha: 1.0) }
     public static var subtitleBlue : UIColor { return UIColor(red: 105/255, green: 133/255, blue: 186/255, alpha: 1.0) }
