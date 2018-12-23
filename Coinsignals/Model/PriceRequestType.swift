@@ -12,7 +12,7 @@ enum PriceRequestType: String {
 }
 
 enum Period: String {
-    case Daily
-    case Monthly
-    case Alltime
+    case Daily = "daily"
+    case Monthly = "monthly"
+    case Alltime = "alltime"
 }

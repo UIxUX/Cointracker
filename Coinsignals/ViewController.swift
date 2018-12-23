@@ -12,7 +12,18 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+//        let webserviceTest = Webservice()
+        
+        
+//        webserviceTest.getHistoricPriceData(dataProvider: .BitcoinAverage, project: .BTC, period: .Daily, completion: {data in
+//            print(data)
+//        })
+        
+        
+//        webserviceTest.getCurrentPriceData(dataProvider: .BitcoinAverage, project: .BTC, completion: {data in
+//            print(data)
+//        })
     }
 
 

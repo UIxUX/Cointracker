@@ -23,12 +23,17 @@ struct AggregatedHistoricPriceData: Codable {
     var alltimeHistoryArray: [AlltimeHistory]
 }
 
-struct DailyHistory: Codable {
+protocol History: Codable {
+    var time: String {get set}
+    var average: Double {get set}
+}
+
+struct DailyHistory: Codable, History {
     var time: String
     var average: Double
 }
 
-struct MonthlyHistory: Codable {
+struct MonthlyHistory: Codable, History {
     var average: Double
     var open: Double
     var low: Double
@@ -36,11 +41,8 @@ struct MonthlyHistory: Codable {
     var time: String
 }
 
-struct AlltimeHistory: Codable {
+struct AlltimeHistory: Codable, History {
     var volume: Double
-    var low: Double?
     var time: String
-    var high: Double?
     var average: Double
-    var open: Double?
 }

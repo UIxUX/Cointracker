@@ -217,7 +217,7 @@ class RateMyApp : UIViewController,UIAlertViewDelegate{
         
         
         if #available(iOS 8.0, *) {
-            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
             
             
             alert.addAction(UIAlertAction(title: alertOKTitle, style:.destructive, handler: { alertAction in
