@@ -7,5 +7,5 @@
 //
 
 struct Constants {
-     static let updatePriceInSeconds: Double = 10
+     static let updatePriceInSeconds: Double = 6
 }

@@ -135,7 +135,8 @@ class ProjectDetailViewController: UITableViewController {
             cell = tableView.dequeueReusableCell(withIdentifier: "ProjectDetailHeaderViewCell", for: indexPath)
             cell.frame.size.width = self.tableView.frame.width
             if let _cell = cell as? ProjectDetailHeaderViewCell {
-                _cell.setProjectLabel(string: "BITCOIN")
+                _cell.delegate = self
+                _cell.setProjectLabel(string: "BTC")
                 _cell.projectImageViewLabel.text = selectedProject.unicode()
                 headerCell = _cell
             }
@@ -223,10 +224,44 @@ class ProjectDetailViewController: UITableViewController {
 extension ProjectDetailViewController: ProjectDetailSimpleStackButtonsCellDelegate {
     func notifyPeriodButtonPressed(period: Period) {
         selectedPeriod = period
-        let newPriceData = DataAPI.shared.getLocalCurrentTickerPriceData(project: selectedProject)
-        self.setCurrentPriceData(currentPriceData: newPriceData!, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
-        drawChartFromExternalData(period: selectedPeriod)
+        if let newPriceData = DataAPI.shared.getLocalCurrentTickerPriceData(project: selectedProject) {
+            self.setCurrentPriceData(currentPriceData: newPriceData, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
+            drawChartFromExternalData(period: selectedPeriod)
+        }
     }
     
+}
+
+extension ProjectDetailViewController: ProjectDetailHeaderViewCellDelegate {
+    func notifyProjectChangeButtonPressed() {
+        let alert = UIAlertController(style: .actionSheet, title: "Choose a different Project 💎")
+        alert.setTitle(font: .systemFont(ofSize: 20), color: .black)
+        alert.setMessage(font: .systemFont(ofSize: 16), color: .black)
+        alert.addAction(image: nil, title: "Bitcoin", color: .black, style: .default) { action in
+            self.switchProject(newProject: .BTC)
+        }
+        alert.addAction(image: nil, title: "Ethereum", color: .black, style: .default) { action in
+            self.switchProject(newProject: .ETH)
+        }
+        alert.addAction(image: nil, title: "Litecoin", color: .black, style: .default) { action in
+            self.switchProject(newProject: .LTC)
+        }
+        alert.addAction(image: nil, title: "Cancel", color: .redAlert, style: .default) { action in
+            /// Do nothing
+        }
+        alert.show(animated: true, vibrate: false) {
+        }
+    }
     
+    func switchProject(newProject: Project) {
+        self.selectedProject = newProject
+        self.headerCell?.projectImageViewLabel.text = newProject.unicode()
+        self.headerCell?.projectLabel.text = newProject.rawValue
+        if let locallySavedHistoricData = DataAPI.shared.getHistoricPriceData(project: selectedProject) {
+            
+            drawChartFromLocalData(period: selectedPeriod, aggregatedHistoricPriceData: locallySavedHistoricData, chartView: (self.projectDetailSimpleChartViewCell?.historicPricesChartView)!)
+        }
+        startSubscribingToCurrentPrice()
+        drawChartFromExternalData(period: selectedPeriod)
+    }
 }

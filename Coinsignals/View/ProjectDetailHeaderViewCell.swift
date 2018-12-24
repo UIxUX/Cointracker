@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol ProjectDetailHeaderViewCellDelegate {
+    func notifyProjectChangeButtonPressed()
+}
+
 class ProjectDetailHeaderViewCell: UITableViewCell {
     @IBOutlet weak var projectImageView: UIImageView!
     @IBOutlet weak var projectLabel: UILabel!
     @IBOutlet weak var projectImageViewLabel: UILabel!
+    @IBOutlet weak var projectChangeButton: ForceTouchButton!
+    
+    var delegate: ProjectDetailHeaderViewCellDelegate?
     
     func setProjectLabel(string: String) {
         let attributedString = NSMutableAttributedString(string: string)
@@ -30,6 +37,11 @@ class ProjectDetailHeaderViewCell: UITableViewCell {
         projectImageViewLabel.text = string
     }
     
+    @IBAction func projectChangeButtonPressed(_ sender: UIButton) {
+        delegate?.notifyProjectChangeButtonPressed()
+    }
+    
+    
     override func awakeFromNib() {
         self.backgroundColor = .clear
         self.backgroundView?.backgroundColor = .clear
@@ -39,5 +51,10 @@ class ProjectDetailHeaderViewCell: UITableViewCell {
         
         projectImageView.applyShadow(intensity: .Strong)
         projectImageView.makeRounded()
+        
+        projectChangeButton.backgroundColor = UIColor.blueCardBackground
+        projectChangeButton.applyShadow(intensity: .Strong)
+        projectChangeButton.makeRounded()
+        
     }
 }
