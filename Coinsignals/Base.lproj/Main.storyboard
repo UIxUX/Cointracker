@@ -186,7 +186,7 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ProjectDetailSimpleChartViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProjectDetailSimpleChartViewCell" rowHeight="232" id="0xs-3d-6wm" userLabel="ProjectDetailSimpleChartViewCell" customClass="ProjectDetailSimpleChartViewCell" customModule="Coinsignals" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="416" width="375" height="232"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0xs-3d-6wm" id="Nv4-cX-UVU">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0xs-3d-6wm" id="Nv4-cX-UVU">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="231.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -197,68 +197,87 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="J1D-OD-vE8"/>
                                             </constraints>
                                         </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fz6-5F-mpR">
-                                            <rect key="frame" x="0.0" y="199" width="375" height="30"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSb-K9-eBJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="125" id="Bw1-GR-lKC"/>
-                                                        <constraint firstAttribute="height" constant="30" id="qnO-aF-eHh"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Daily"/>
-                                                    <connections>
-                                                        <action selector="dailyButtonPressed:" destination="0xs-3d-6wm" eventType="touchUpInside" id="ctn-cK-5kh"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3N-R1-Ada">
-                                                    <rect key="frame" x="125" y="0.0" width="125" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Vvb-rs-DBw"/>
-                                                        <constraint firstAttribute="width" constant="125" id="pFk-Vg-KGp"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Monthly"/>
-                                                    <connections>
-                                                        <action selector="monthlyButtonPressed:" destination="0xs-3d-6wm" eventType="touchUpInside" id="KUq-u9-z6F"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HE-eJ-4Vy">
-                                                    <rect key="frame" x="250" y="0.0" width="125" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="125" id="L6S-t4-3CK"/>
-                                                        <constraint firstAttribute="height" constant="30" id="LrG-uN-joG"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Alltime"/>
-                                                    <connections>
-                                                        <action selector="alltimeButtonPressed:" destination="0xs-3d-6wm" eventType="touchUpInside" id="5P0-NS-2Ba"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="D1e-Mi-E5b"/>
-                                            </constraints>
-                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fz6-5F-mpR" secondAttribute="bottom" constant="6.5" id="CSU-1g-EMB"/>
-                                        <constraint firstItem="fz6-5F-mpR" firstAttribute="top" secondItem="bFZ-M2-jP5" secondAttribute="bottom" id="VX0-gF-Mi7"/>
+                                        <constraint firstAttribute="bottom" secondItem="bFZ-M2-jP5" secondAttribute="bottom" id="UI9-jb-ubM"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="bFZ-M2-jP5" firstAttribute="leading" secondItem="0xs-3d-6wm" secondAttribute="leading" id="9Z0-mW-Qmh"/>
-                                    <constraint firstItem="fz6-5F-mpR" firstAttribute="leading" secondItem="0xs-3d-6wm" secondAttribute="leading" id="AHd-i4-d26"/>
                                     <constraint firstAttribute="trailing" secondItem="bFZ-M2-jP5" secondAttribute="trailing" id="ZsH-TF-vHP"/>
-                                    <constraint firstAttribute="trailing" secondItem="fz6-5F-mpR" secondAttribute="trailing" id="bcz-wm-3lG"/>
                                     <constraint firstItem="bFZ-M2-jP5" firstAttribute="top" secondItem="0xs-3d-6wm" secondAttribute="top" id="cEy-0e-mXR"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="alltimeButton" destination="2HE-eJ-4Vy" id="HgS-Bl-XT9"/>
-                                    <outlet property="dailyButton" destination="jSb-K9-eBJ" id="2UU-C5-efn"/>
                                     <outlet property="historicPricesChartView" destination="bFZ-M2-jP5" id="iAm-U2-Olm"/>
-                                    <outlet property="monthlyButton" destination="u3N-R1-Ada" id="10c-3x-bdw"/>
-                                    <outlet property="stackView" destination="fz6-5F-mpR" id="g2w-MI-DzM"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ProjectDetailSimpleStackButtonsCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProjectDetailSimpleStackButtonsCell" rowHeight="232" id="1EO-f4-XI7" userLabel="ProjectDetailSimpleStackButtonsCell" customClass="ProjectDetailSimpleStackButtonsCell" customModule="Coinsignals" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="648" width="375" height="232"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1EO-f4-XI7" id="Y1M-Co-JVz">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="231.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RtL-hO-aBT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="231.5"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXH-xK-Mxl">
+                                                    <rect key="frame" x="0.0" y="101" width="125" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="OZc-SR-MPB"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="WsW-FA-N9f"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Daily"/>
+                                                    <connections>
+                                                        <action selector="dailyButtonPressed:" destination="1EO-f4-XI7" eventType="touchUpInside" id="XrC-ta-oqM"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXJ-Rc-owO">
+                                                    <rect key="frame" x="125" y="101" width="125" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="4RF-55-rSL"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Vkf-gU-UN6"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Monthly"/>
+                                                    <connections>
+                                                        <action selector="monthlyButtonPressed:" destination="1EO-f4-XI7" eventType="touchUpInside" id="wPw-bc-JHk"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7x-Ke-aTr">
+                                                    <rect key="frame" x="250" y="101" width="125" height="30"/>
+                                                    <color key="backgroundColor" red="1" green="0.23625942680000001" blue="0.1342383107" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="HYY-YJ-jw7"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="zil-N8-so3"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Alltime"/>
+                                                    <connections>
+                                                        <action selector="alltimeButtonPressed:" destination="1EO-f4-XI7" eventType="touchUpInside" id="fTG-R7-lWE"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="4ki-Pr-Joz"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="RtL-hO-aBT" firstAttribute="top" secondItem="Y1M-Co-JVz" secondAttribute="top" id="VqN-Uw-1bd"/>
+                                        <constraint firstAttribute="bottom" secondItem="RtL-hO-aBT" secondAttribute="bottom" id="syw-Av-1nn"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="RtL-hO-aBT" secondAttribute="trailing" id="QkL-YK-zdE"/>
+                                    <constraint firstItem="RtL-hO-aBT" firstAttribute="leading" secondItem="1EO-f4-XI7" secondAttribute="leading" id="nQj-O1-BiJ"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="alltimeButton" destination="P7x-Ke-aTr" id="BwT-OZ-u5p"/>
+                                    <outlet property="dailyButton" destination="SXH-xK-Mxl" id="22I-bm-Scq"/>
+                                    <outlet property="monthlyButton" destination="FXJ-Rc-owO" id="QDy-i5-nac"/>
+                                    <outlet property="stackView" destination="RtL-hO-aBT" id="Jda-tj-gLE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -160,13 +160,20 @@ class ProjectDetailViewController: UITableViewController {
             ///ProjectDetailSimpleChartViewCell
             cell = tableView.dequeueReusableCell(withIdentifier: "ProjectDetailSimpleChartViewCell", for: indexPath)
             if let _cell = cell as? ProjectDetailSimpleChartViewCell {
-                _cell.delegate = self
+                
                 if let locallySavedHistoricData = DataAPI.shared.getHistoricPriceData(project: selectedProject) {
                     drawChartFromLocalData(period: selectedPeriod, aggregatedHistoricPriceData: locallySavedHistoricData, chartView: _cell.historicPricesChartView)
                 }
                 
                 projectDetailSimpleChartViewCell = _cell
                 drawChartFromExternalData(period: selectedPeriod)
+            }
+            break
+        case 3:
+            ///ProjectDetailSimpleStackButtonsCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "ProjectDetailSimpleStackButtonsCell", for: indexPath)
+            if let _cell = cell as? ProjectDetailSimpleStackButtonsCell {
+              _cell.delegate = self
             }
             break
         default:
@@ -180,6 +187,12 @@ class ProjectDetailViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 2:
+            return 400
+        default:
+            return UITableView.automaticDimension
+        }
         return UITableView.automaticDimension
     }
     
@@ -196,7 +209,7 @@ class ProjectDetailViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     //Hides status bar
@@ -207,9 +220,11 @@ class ProjectDetailViewController: UITableViewController {
 
 
 
-extension ProjectDetailViewController: ProjectDetailSimpleChartViewCellDelegate {
+extension ProjectDetailViewController: ProjectDetailSimpleStackButtonsCellDelegate {
     func notifyPeriodButtonPressed(period: Period) {
         selectedPeriod = period
+        let newPriceData = DataAPI.shared.getLocalCurrentTickerPriceData(project: selectedProject)
+        self.setCurrentPriceData(currentPriceData: newPriceData!, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
         drawChartFromExternalData(period: selectedPeriod)
     }
     
