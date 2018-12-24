@@ -61,6 +61,27 @@ class ProjectDetailViewController: UITableViewController {
         }
     }
     
+    private func setSentimentData(sentiment: Int, _projectDetailSimpleOverViewCell: ProjectDetailSimpleOverViewCell?) {
+        
+        if _projectDetailSimpleOverViewCell != nil {
+            if sentiment > 20 {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "ExtremelyGood (\(sentiment))", bubble: ((_projectDetailSimpleOverViewCell!.sentimentValueButton)!), success: true)
+            } else if sentiment > 10 {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "VeryGood (\(sentiment))", bubble: ((_projectDetailSimpleOverViewCell!.sentimentValueButton)!), success: true)
+            } else if sentiment > 0 {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "Neutral (\(sentiment))", bubble: ((_projectDetailSimpleOverViewCell!.sentimentValueButton)!), success: true, neutral: true)
+            } else if sentiment == 0 {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "Neutral (\(sentiment))", bubble: ((_projectDetailSimpleOverViewCell!.sentimentValueButton)!), success: true, neutral: true)
+            } else if sentiment > -10 {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "Bad (\(sentiment))", bubble: ((_projectDetailSimpleOverViewCell!.sentimentValueButton)!), success: false)
+            } else if sentiment > -20 {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "VeryBad (\(sentiment))", bubble: ((_projectDetailSimpleOverViewCell!.sentimentValueButton)!), success: false)
+            } else {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "ExtremelyBad (\(sentiment))", bubble: ((_projectDetailSimpleOverViewCell!.sentimentValueButton)!), success: false)
+            }
+        }
+    }
+    
     private func setCurrentPriceData(currentPriceData: CurrentTickerPriceData, _projectDetailSimpleOverViewCell: ProjectDetailSimpleOverViewCell?) {
         if _projectDetailSimpleOverViewCell != nil {
             _projectDetailSimpleOverViewCell!.setPriceLabel(string: "\(currentPriceData.last)$")
@@ -99,7 +120,13 @@ class ProjectDetailViewController: UITableViewController {
                 chartView.drawChart()
 
                 if let rsi = DataAPI.shared.getRsiData(project: self.selectedProject) {
+                    print("lll RSI ist: \(rsi)")
                     self.setRsiData(rsi: rsi, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
+                } else {
+                    print("lll Rsi konnte nicht berechnet werden")
+                    if self.projectDetailSimpleOverViewCell != nil {
+                        self.projectDetailSimpleOverViewCell!.setBubbleText(string: "N/A", bubble: self.projectDetailSimpleOverViewCell!.rsiValueButton)
+                    }
                 }
             })
         }
@@ -164,9 +191,10 @@ class ProjectDetailViewController: UITableViewController {
             ///ProjectDetailSimpleOverViewCell
             cell = tableView.dequeueReusableCell(withIdentifier: "ProjectDetailSimpleOverViewCell", for: indexPath)
             if let _cell = cell as? ProjectDetailSimpleOverViewCell {
-                _cell.setPriceLabel(string: "4132$")
-                _cell.setBubbleText(string: "+15%", bubble: _cell.priceChangedButton)
-                _cell.setBubbleText(string: "OVERSOLD", bubble: _cell.rsiValueButton)
+                _cell.setPriceLabel(string: "Fetching..")
+                _cell.setBubbleText(string: "Fetching..", bubble: _cell.priceChangedButton)
+                _cell.setBubbleText(string: "Calculating..", bubble: _cell.rsiValueButton)
+                _cell.setBubbleText(string: "Calculating..", bubble: _cell.sentimentValueButton)
                 
                 if let locallySavedTickerData = DataAPI.shared.getLocalCurrentTickerPriceData(project: selectedProject) {
                     self.setCurrentPriceData(currentPriceData: locallySavedTickerData, _projectDetailSimpleOverViewCell: _cell)
@@ -175,8 +203,16 @@ class ProjectDetailViewController: UITableViewController {
                 if let rsi = DataAPI.shared.getRsiData(project: self.selectedProject) {
                     self.setRsiData(rsi: rsi, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
                 }
-               
-                _cell.setBubbleText(string: "GREAT", bubble: _cell.sentimentValueButton)
+                
+                /// Get Sentiment Data externally & save it locally
+                DispatchQueue.main.async(execute: {
+                    DataAPI.shared.calculateAndSaveSentimentData(project: self.selectedProject, completion: {sentiment in
+                        if sentiment != nil {
+                            self.setSentimentData(sentiment: sentiment!, _projectDetailSimpleOverViewCell: _cell)
+                        }
+                    })
+                })
+                
                 projectDetailSimpleOverViewCell = _cell
             }
             break
@@ -278,6 +314,13 @@ extension ProjectDetailViewController: ProjectDetailHeaderViewCellDelegate {
     
     func switchProject(newProject: Project) {
         self.selectedProject = newProject
+        if let _cell = self.projectDetailSimpleOverViewCell {
+            _cell.setPriceLabel(string: "Fetching..")
+            _cell.setBubbleText(string: "Fetching..", bubble: _cell.priceChangedButton)
+            _cell.setBubbleText(string: "Calculating..", bubble: _cell.rsiValueButton)
+            _cell.setBubbleText(string: "Calculating..", bubble: _cell.sentimentValueButton)
+        }
+        
         self.headerCell?.projectImageViewLabel.text = newProject.unicode()
         self.headerCell?.projectLabel.text = newProject.rawValue
         if let locallySavedHistoricData = DataAPI.shared.getHistoricPriceData(project: selectedProject) {
@@ -290,5 +333,15 @@ extension ProjectDetailViewController: ProjectDetailHeaderViewCellDelegate {
         if let rsi = DataAPI.shared.getRsiData(project: self.selectedProject) {
             self.setRsiData(rsi: rsi, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
         }
+        
+        /// Get Sentiment Data externally & save it locally
+        DispatchQueue.main.async(execute: {
+            DataAPI.shared.calculateAndSaveSentimentData(project: self.selectedProject, completion: {sentiment in
+                if sentiment != nil && self.projectDetailSimpleOverViewCell != nil {
+                    self.setSentimentData(sentiment: sentiment!, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell!)
+                }
+            })
+        })
+        
     }
 }

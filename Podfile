@@ -7,6 +7,7 @@ target 'Coinsignals' do
   pod 'Alamofire', '~> 4.8.0'
   pod 'Charts'
   pod "Pastel"
+  pod 'SwiftyJSON', '~> 4.0'
   # Pods for Coinsignals
 
 end

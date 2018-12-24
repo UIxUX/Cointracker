@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if rate.isFirstTime() || rate.debug == true {
             print("First Time!")
-            /// TODO: Get ALL Data externally & save it locally
             
         } else {
             print("Not first Time!")

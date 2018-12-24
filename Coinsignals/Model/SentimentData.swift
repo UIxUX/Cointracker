@@ -9,10 +9,10 @@
 import Foundation
 
 struct AllSentimentData: Codable {
-    var projectSentimentDict: Dictionary<Project,Sentiment>
+    var projectSentimentDict: Dictionary<Project,Int>
     
     init() {
-        projectSentimentDict = Dictionary<Project,Sentiment>()
+        projectSentimentDict = Dictionary<Project,Int>()
     }
 }
 

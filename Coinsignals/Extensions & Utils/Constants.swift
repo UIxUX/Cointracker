@@ -8,4 +8,5 @@
 
 struct Constants {
      static let updatePriceInSeconds: Double = 6
+     static let amountOfTweetsForSentimentAnalysis: Int = 100
 }

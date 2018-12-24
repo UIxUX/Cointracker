@@ -143,7 +143,69 @@
 		B3C14A9421D06EC000AA898B /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A2A21D06EC000AA898B /* SegmentedControl.swift */; };
 		B3C14A9521D06EC000AA898B /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A2B21D06EC000AA898B /* TextField.swift */; };
 		B3C14A9721D07E1100AA898B /* RSICalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A9621D07E1100AA898B /* RSICalculator.swift */; };
+		B3C14A9B21D08A5F00AA898B /* TweetSentimentClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A9A21D08A5F00AA898B /* TweetSentimentClassifier.mlmodel */; };
+		B3C14A9D21D08C8000AA898B /* TwitterSentimentAnalyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A9C21D08C8000AA898B /* TwitterSentimentAnalyser.swift */; };
+		B3C14C0821D0925800AA898B /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3C14C0121D0920D00AA898B /* SwifteriOS.framework */; };
+		B3C14C0921D0925800AA898B /* SwifteriOS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B3C14C0121D0920D00AA898B /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B3C14BFE21D0920D00AA898B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B300C1F1944AA1A00993175;
+			remoteInfo = SwifterDemoiOS;
+		};
+		B3C14C0021D0920D00AA898B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B9F50EE1944A5AB00894629;
+			remoteInfo = SwifteriOS;
+		};
+		B3C14C0221D0920D00AA898B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B9F51131944A61D00894629;
+			remoteInfo = SwifterMac;
+		};
+		B3C14C0421D0920D00AA898B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B300C471944AECB00993175;
+			remoteInfo = SwifterDemoMac;
+		};
+		B3C14C0621D0920D00AA898B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F6B4D5751C7BAC4500E06514;
+			remoteInfo = SwifterTests;
+		};
+		B3C14C0A21D0925800AA898B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B9F50ED1944A5AB00894629;
+			remoteInfo = SwifteriOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B3C14B5B21D08FD200AA898B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B3C14C0921D0925800AA898B /* SwifteriOS.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0B73AA3118A4F6A5D499E0A4 /* Pods_Coinsignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Coinsignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,6 +347,10 @@
 		B3C14A2A21D06EC000AA898B /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		B3C14A2B21D06EC000AA898B /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		B3C14A9621D07E1100AA898B /* RSICalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSICalculator.swift; sourceTree = "<group>"; };
+		B3C14A9A21D08A5F00AA898B /* TweetSentimentClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TweetSentimentClassifier.mlmodel; sourceTree = "<group>"; };
+		B3C14A9C21D08C8000AA898B /* TwitterSentimentAnalyser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterSentimentAnalyser.swift; sourceTree = "<group>"; };
+		B3C14B5921D08E3F00AA898B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = ../../Desktop/Swifter/Swifter.xcodeproj; sourceTree = "<group>"; };
 		DB34929F9730F1E6AC9710FA /* Pods-Coinsignals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsignals.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsignals/Pods-Coinsignals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -295,6 +361,7 @@
 			files = (
 				B34B1AEB21CEF4FE00EF8528 /* Alamofire.framework in Frameworks */,
 				23B9C095B786C59AB6AC5F38 /* Pods_Coinsignals.framework in Frameworks */,
+				B3C14C0821D0925800AA898B /* SwifteriOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +380,7 @@
 		3F7EF51721CD481800CD394D = {
 			isa = PBXGroup;
 			children = (
+				B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */,
 				3F7EF52221CD481800CD394D /* Coinsignals */,
 				3F7EF52121CD481800CD394D /* Products */,
 				E711148685E99DF68179C6ED /* Pods */,
@@ -331,6 +399,7 @@
 		3F7EF52221CD481800CD394D /* Coinsignals */ = {
 			isa = PBXGroup;
 			children = (
+				B3C14A9921D08A4700AA898B /* SentimentAnalysis */,
 				B3C149A021D06E8E00AA898B /* 3rd Party */,
 				3F7EF54321CD546900CD394D /* Resources */,
 				3F7EF53A21CD4A9E00CD394D /* Webservices & Networking */,
@@ -339,6 +408,7 @@
 				3F7EF53621CD49D600CD394D /* Model */,
 				3F7EF53521CD49CA00CD394D /* Extensions & Utils */,
 				3F7EF52321CD481800CD394D /* AppDelegate.swift */,
+				B3C14B5921D08E3F00AA898B /* Assets.xcassets */,
 				3F7EF52721CD481800CD394D /* Main.storyboard */,
 				3F7EF52C21CD481A00CD394D /* LaunchScreen.storyboard */,
 				3F7EF52F21CD481A00CD394D /* Info.plist */,
@@ -356,6 +426,7 @@
 				B34B1AF521CF297500EF8528 /* Extensions.swift */,
 				B3C1491721D05BDF00AA898B /* VibrationManager.swift */,
 				B3C14A9621D07E1100AA898B /* RSICalculator.swift */,
+				B3C14A9C21D08C8000AA898B /* TwitterSentimentAnalyser.swift */,
 			);
 			path = "Extensions & Utils";
 			sourceTree = "<group>";
@@ -798,6 +869,26 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		B3C14A9921D08A4700AA898B /* SentimentAnalysis */ = {
+			isa = PBXGroup;
+			children = (
+				B3C14A9A21D08A5F00AA898B /* TweetSentimentClassifier.mlmodel */,
+			);
+			path = SentimentAnalysis;
+			sourceTree = "<group>";
+		};
+		B3C14BF721D0920C00AA898B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B3C14BFF21D0920D00AA898B /* SwifterDemoiOS.app */,
+				B3C14C0121D0920D00AA898B /* SwifteriOS.framework */,
+				B3C14C0321D0920D00AA898B /* SwifterMac.framework */,
+				B3C14C0521D0920D00AA898B /* SwifterDemoMac.app */,
+				B3C14C0721D0920D00AA898B /* SwifterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E711148685E99DF68179C6ED /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,10 +910,12 @@
 				3F7EF51D21CD481800CD394D /* Frameworks */,
 				3F7EF51E21CD481800CD394D /* Resources */,
 				B636D74A947240217D7403FD /* [CP] Embed Pods Frameworks */,
+				B3C14B5B21D08FD200AA898B /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B3C14C0B21D0925800AA898B /* PBXTargetDependency */,
 			);
 			name = Coinsignals;
 			productName = Coinsignals;
@@ -855,12 +948,56 @@
 			mainGroup = 3F7EF51721CD481800CD394D;
 			productRefGroup = 3F7EF52121CD481800CD394D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B3C14BF721D0920C00AA898B /* Products */;
+					ProjectRef = B3C14BF621D0920C00AA898B /* Swifter.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3F7EF51F21CD481800CD394D /* Coinsignals */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B3C14BFF21D0920D00AA898B /* SwifterDemoiOS.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SwifterDemoiOS.app;
+			remoteRef = B3C14BFE21D0920D00AA898B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B3C14C0121D0920D00AA898B /* SwifteriOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwifteriOS.framework;
+			remoteRef = B3C14C0021D0920D00AA898B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B3C14C0321D0920D00AA898B /* SwifterMac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwifterMac.framework;
+			remoteRef = B3C14C0221D0920D00AA898B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B3C14C0521D0920D00AA898B /* SwifterDemoMac.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SwifterDemoMac.app;
+			remoteRef = B3C14C0421D0920D00AA898B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B3C14C0721D0920D00AA898B /* SwifterTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwifterTests.xctest;
+			remoteRef = B3C14C0621D0920D00AA898B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3F7EF51E21CD481800CD394D /* Resources */ = {
@@ -905,12 +1042,14 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/Pastel/Pastel.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pastel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -930,6 +1069,7 @@
 				B3C14A3A21D06EC000AA898B /* UIImageView+Extensions.swift in Sources */,
 				B34B1AFE21CFFD0D00EF8528 /* HistoricPriceChartView.swift in Sources */,
 				B3C14A6521D06EC000AA898B /* OneTextFieldViewController.swift in Sources */,
+				B3C14A9D21D08C8000AA898B /* TwitterSentimentAnalyser.swift in Sources */,
 				B3C14A3821D06EC000AA898B /* UIColor+Extensions.swift in Sources */,
 				3F7EF52621CD481800CD394D /* ViewController.swift in Sources */,
 				B3C14A8E21D06EC000AA898B /* AttributedTextBlock.swift in Sources */,
@@ -994,6 +1134,7 @@
 				B34B1AE521CEB0F400EF8528 /* RsiData.swift in Sources */,
 				B3C14A8321D06EC000AA898B /* ItemBaseController.swift in Sources */,
 				B3C14A7821D06EC000AA898B /* UIViewController.swift in Sources */,
+				B3C14A9B21D08A5F00AA898B /* TweetSentimentClassifier.mlmodel in Sources */,
 				B3C14A9021D06EC000AA898B /* Button.swift in Sources */,
 				B3C14A9221D06EC000AA898B /* Label.swift in Sources */,
 				B3C14A4621D06EC000AA898B /* DatePickerViewController.swift in Sources */,
@@ -1058,6 +1199,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B3C14C0B21D0925800AA898B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwifteriOS;
+			targetProxy = B3C14C0A21D0925800AA898B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3F7EF52721CD481800CD394D /* Main.storyboard */ = {
@@ -1199,6 +1348,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A8F2249FA59898968B222E98 /* Pods-Coinsignals.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4D92J46PPW;
@@ -1218,6 +1368,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB34929F9730F1E6AC9710FA /* Pods-Coinsignals.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4D92J46PPW;

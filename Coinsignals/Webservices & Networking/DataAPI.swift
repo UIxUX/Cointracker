@@ -45,10 +45,12 @@ final class DataAPI {
             }
         })
         
+        
         return pManager
     }()
     
     private let currentPriceSubscriptionManager = CurrentPriceSubscriptionManager()
+    private let sentimentManager = TwitterSentimentAnalyser()
     
     /// - Mark: Start subscribing to price data
     
@@ -105,14 +107,17 @@ final class DataAPI {
         
         webservice.getHistoricPriceData(dataProvider: .BitcoinAverage, project: project, period: period, completion: {
             (historicData) -> Void in
-            completion(historicData)
             /// Update and Save
             self.updateLocalHistoricPriceData(project: project, priceHistory: historicData, period: period)
-            self.saveAllHistoricPriceDataLocally()
             
             /// Calculate Rsi and save
             let rsi = RSICalculator.calculateRSI(data: historicData)
+            print("lll just calculated RSI: \(rsi)")
             self.updateLocalRsiData(project: project, rsi: rsi)
+            
+            completion(historicData)
+            
+            self.saveAllHistoricPriceDataLocally()
             self.saveAllRsiDataLocally()
         })
     }
@@ -143,15 +148,30 @@ final class DataAPI {
     
     /// - Mark: Get / Set / Locally Save Sentiment Data
     
+    func calculateAndSaveSentimentData(project: Project, completion: @escaping (Int?) -> Void) {
+       
+        sentimentManager.getSentimentScoreFor(string: "#\(project.rawValue)", completion: {
+            (sentiment) -> Void in
+            if sentiment != nil {
+                self.persistencyManager.updateLocalSentimentData(project: project, sentiment: sentiment)
+                self.persistencyManager.saveAllSentimentDataLocally()
+                
+                completion(sentiment)
+            }
+        })
+        
+        
+    }
+    
     func getAllSentimentData() -> AllSentimentData {
         return persistencyManager.getAllSentimentData()
     }
     
-    func getSentimentData(project: Project) -> Sentiment? {
+    func getSentimentData(project: Project) -> Int? {
         return persistencyManager.getSentimentData(project: project)
     }
     
-    func updateLocalSentimentData(project: Project, sentiment: Sentiment) {
+    func updateLocalSentimentData(project: Project, sentiment: Int) {
         persistencyManager.updateLocalSentimentData(project: project, sentiment: sentiment)
     }
     
@@ -294,7 +314,6 @@ final class PersistencyManager {
     }
     
     fileprivate func retrieveSavedAllHistoricPriceData(completion: @escaping (AllHistoricPriceData?) -> Void) {
-//        DispatchQueue.main.async(execute: {
             print("Retrieving Locally Saved Historic Price Data")
             var priceData: AllHistoricPriceData?
             if let data = UserDefaults.standard.value(forKey: "allHistoricPriceData") as? Data {
@@ -306,7 +325,6 @@ final class PersistencyManager {
                 print("FAILURE: Retrieving Locally Saved Historic Price Data")
                 completion(priceData)
             }
-//        })
     }
     
     
@@ -316,17 +334,39 @@ final class PersistencyManager {
         return allSentimentData
     }
     
-    fileprivate func getSentimentData(project: Project) -> Sentiment? {
+    fileprivate func getSentimentData(project: Project) -> Int? {
         return allSentimentData.projectSentimentDict[project]
     }
     
-    fileprivate func updateLocalSentimentData(project: Project, sentiment: Sentiment) {
+    fileprivate func updateLocalSentimentData(project: Project, sentiment: Int) {
         allSentimentData.projectSentimentDict.updateValue(sentiment, forKey: project)
     }
     
-    fileprivate func saveAllSentimentDataLocally() {
-        /// TODO
+    func updateLocalAllRsiData (allSentimentData: AllSentimentData) {
+        self.allSentimentData = allSentimentData
     }
+    
+    fileprivate func saveAllSentimentDataLocally() {
+        DispatchQueue.main.async(execute: {
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(self.allSentimentData), forKey: "allSentimentData")
+            print("allSentimentData locally saved.")
+        })
+    }
+    
+    fileprivate func retrieveSavedAllSentimentData(completion: @escaping (AllSentimentData?) -> Void) {
+        print("Retrieving Locally Saved AllSentimentData Data")
+        var allSentimentData: AllSentimentData?
+        if let data = UserDefaults.standard.value(forKey: "allSentimentData") as? Data {
+            print("SUCCESS: Retrieving Locally Saved AllSentimentData")
+            allSentimentData = try? PropertyListDecoder().decode(AllSentimentData.self, from: data)
+            print("RSIData: \(allSentimentData)")
+            completion(allSentimentData)
+        } else {
+            print("FAILURE: Retrieving Locally Saved AllSentimentData")
+            completion(allSentimentData)
+        }
+    }
+    
     
     
     /// - Mark: Get / Set / Locally Save RSI Data
