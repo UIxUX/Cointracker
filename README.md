@@ -12,10 +12,12 @@
 🖥 Video showcasing the functionality of the App:
 https://youtu.be/giDgkB1qAO0</p><br/>
 
+<div align=left>
 * 💵 Tracks & Observes the price & pricechange of BTC, ETH & LTC using the https://apiv2.bitcoinaverage.com API
 * 📈 Draws a pricechart that can be adjusted to daily/monthly/alltime settings
 * 📊 Calculates the 1D RSI 
 * 🧠 Assesses the current Twitter Sentiment of given projects using CoreML
+</div>
 
 </br>
 <h3>Setup</h3>
