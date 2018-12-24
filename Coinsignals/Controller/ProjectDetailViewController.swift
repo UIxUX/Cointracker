@@ -29,6 +29,10 @@ class ProjectDetailViewController: UITableViewController {
         DataAPI.shared.getExternalCurrentTickerPriceData(project: selectedProject, completion: {
             (currentPriceData) -> Void in
             self.setCurrentPriceData(currentPriceData: currentPriceData, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
+            
+            if let rsi = DataAPI.shared.getRsiData(project: self.selectedProject) {
+                self.setRsiData(rsi: rsi, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
+            }
         })
         
         /// Starts Subscription to Price Ticker
@@ -43,6 +47,18 @@ class ProjectDetailViewController: UITableViewController {
             (currentPriceData) -> Void in
             self.setCurrentPriceData(currentPriceData: currentPriceData, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
         })
+    }
+    
+    private func setRsiData(rsi: Double, _projectDetailSimpleOverViewCell: ProjectDetailSimpleOverViewCell?) {
+        if _projectDetailSimpleOverViewCell != nil {
+            if rsi >= 70 {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "OVERBOUGHT (\(Int(rsi)))", bubble: ((_projectDetailSimpleOverViewCell!.rsiValueButton)!), success: false)
+            } else if rsi <= 30 {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "OVERSOLD (\(Int(rsi)))", bubble: ((_projectDetailSimpleOverViewCell!.rsiValueButton)!), success: true)
+            } else {
+                _projectDetailSimpleOverViewCell!.setBubbleText(string: "NEUTRAL (\(Int(rsi)))", bubble: ((_projectDetailSimpleOverViewCell!.rsiValueButton)!), success: true, neutral: true)
+            }
+        }
     }
     
     private func setCurrentPriceData(currentPriceData: CurrentTickerPriceData, _projectDetailSimpleOverViewCell: ProjectDetailSimpleOverViewCell?) {
@@ -82,6 +98,9 @@ class ProjectDetailViewController: UITableViewController {
                 let chartView = ChartView(chartView: self.projectDetailSimpleChartViewCell!.historicPricesChartView, chartValues: chartPrices)
                 chartView.drawChart()
 
+                if let rsi = DataAPI.shared.getRsiData(project: self.selectedProject) {
+                    self.setRsiData(rsi: rsi, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
+                }
             })
         }
     }
@@ -147,12 +166,16 @@ class ProjectDetailViewController: UITableViewController {
             if let _cell = cell as? ProjectDetailSimpleOverViewCell {
                 _cell.setPriceLabel(string: "4132$")
                 _cell.setBubbleText(string: "+15%", bubble: _cell.priceChangedButton)
+                _cell.setBubbleText(string: "OVERSOLD", bubble: _cell.rsiValueButton)
                 
                 if let locallySavedTickerData = DataAPI.shared.getLocalCurrentTickerPriceData(project: selectedProject) {
                     self.setCurrentPriceData(currentPriceData: locallySavedTickerData, _projectDetailSimpleOverViewCell: _cell)
                 }
+                
+                if let rsi = DataAPI.shared.getRsiData(project: self.selectedProject) {
+                    self.setRsiData(rsi: rsi, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
+                }
                
-                _cell.setBubbleText(string: "OVERSOLD", bubble: _cell.rsiValueButton)
                 _cell.setBubbleText(string: "GREAT", bubble: _cell.sentimentValueButton)
                 projectDetailSimpleOverViewCell = _cell
             }
@@ -263,5 +286,9 @@ extension ProjectDetailViewController: ProjectDetailHeaderViewCellDelegate {
         }
         startSubscribingToCurrentPrice()
         drawChartFromExternalData(period: selectedPeriod)
+        
+        if let rsi = DataAPI.shared.getRsiData(project: self.selectedProject) {
+            self.setRsiData(rsi: rsi, _projectDetailSimpleOverViewCell: self.projectDetailSimpleOverViewCell)
+        }
     }
 }

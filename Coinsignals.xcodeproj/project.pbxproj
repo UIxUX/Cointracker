@@ -142,6 +142,7 @@
 		B3C14A9321D06EC000AA898B /* PickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A2921D06EC000AA898B /* PickerStyle.swift */; };
 		B3C14A9421D06EC000AA898B /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A2A21D06EC000AA898B /* SegmentedControl.swift */; };
 		B3C14A9521D06EC000AA898B /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A2B21D06EC000AA898B /* TextField.swift */; };
+		B3C14A9721D07E1100AA898B /* RSICalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C14A9621D07E1100AA898B /* RSICalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -283,6 +284,7 @@
 		B3C14A2921D06EC000AA898B /* PickerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerStyle.swift; sourceTree = "<group>"; };
 		B3C14A2A21D06EC000AA898B /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		B3C14A2B21D06EC000AA898B /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		B3C14A9621D07E1100AA898B /* RSICalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSICalculator.swift; sourceTree = "<group>"; };
 		DB34929F9730F1E6AC9710FA /* Pods-Coinsignals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsignals.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsignals/Pods-Coinsignals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -353,6 +355,7 @@
 				B34B1AE821CED61600EF8528 /* RateMyApp.swift */,
 				B34B1AF521CF297500EF8528 /* Extensions.swift */,
 				B3C1491721D05BDF00AA898B /* VibrationManager.swift */,
+				B3C14A9621D07E1100AA898B /* RSICalculator.swift */,
 			);
 			path = "Extensions & Utils";
 			sourceTree = "<group>";
@@ -961,6 +964,7 @@
 				B34B1ADE21CEA0C600EF8528 /* DataAPI.swift in Sources */,
 				B3C14A5A21D06EC000AA898B /* AssetsCollection.swift in Sources */,
 				B3C14A8C21D06EC000AA898B /* VideoView.swift in Sources */,
+				B3C14A9721D07E1100AA898B /* RSICalculator.swift in Sources */,
 				B34B1AED21CEFEE300EF8528 /* DataProviders.swift in Sources */,
 				B3C14A3521D06EC000AA898B /* String+Extensions.swift in Sources */,
 				B3C14A6F21D06EC000AA898B /* PickerCustomizableButton.swift in Sources */,

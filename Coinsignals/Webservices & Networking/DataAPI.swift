@@ -37,6 +37,14 @@ final class DataAPI {
             }
         })
         
+        pManager.retrieveSavedAllRsiData(completion: {(savedAllRsiData) -> Void in
+            if savedAllRsiData != nil {
+                pManager.updateLocalAllRsiData(allRsiData: savedAllRsiData!)
+            } else {
+                /// Calculate and Save RsiData?
+            }
+        })
+        
         return pManager
     }()
     
@@ -101,6 +109,11 @@ final class DataAPI {
             /// Update and Save
             self.updateLocalHistoricPriceData(project: project, priceHistory: historicData, period: period)
             self.saveAllHistoricPriceDataLocally()
+            
+            /// Calculate Rsi and save
+            let rsi = RSICalculator.calculateRSI(data: historicData)
+            self.updateLocalRsiData(project: project, rsi: rsi)
+            self.saveAllRsiDataLocally()
         })
     }
     
@@ -153,12 +166,16 @@ final class DataAPI {
         return persistencyManager.getAllRsiData()
     }
     
-    func getRsiData(project: Project) -> Rsi? {
+    func getRsiData(project: Project) -> Double? {
         return persistencyManager.getRsiData(project: project)
     }
     
-    func updateLocalRsiData(project: Project, rsi: Rsi) {
+    func updateLocalRsiData(project: Project, rsi: Double) {
        persistencyManager.updateLocalRsiData(project: project, rsi: rsi)
+    }
+    
+    func updateLocalAllRsiData (allRsiData: AllRsiData) {
+        /// TODO
     }
     
     func saveAllRsiDataLocally() {
@@ -222,7 +239,6 @@ final class PersistencyManager {
                 print("FAILURE: Retrieving Locally Saved Ticker Price Data")
                 completion(priceData)
             }
-//        })
     }
     
     /// - Mark: Get / Set / Locally Save HISTORIC Price Data
@@ -319,16 +335,37 @@ final class PersistencyManager {
         return allRsiData
     }
     
-    fileprivate func getRsiData(project: Project) -> Rsi? {
+    fileprivate func getRsiData(project: Project) -> Double? {
         return allRsiData.projectRsiDict[project]
     }
     
-    fileprivate func updateLocalRsiData(project: Project, rsi: Rsi) {
+    fileprivate func updateLocalRsiData(project: Project, rsi: Double) {
         allRsiData.projectRsiDict.updateValue(rsi, forKey: project)
     }
     
+    func updateLocalAllRsiData (allRsiData: AllRsiData) {
+        self.allRsiData = allRsiData
+    }
+    
     fileprivate func saveAllRsiDataLocally() {
-        /// TODO
+        DispatchQueue.main.async(execute: {
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(self.allRsiData), forKey: "allRsiData")
+            print("AllRsiData locally saved.")
+        })
+    }
+    
+    fileprivate func retrieveSavedAllRsiData(completion: @escaping (AllRsiData?) -> Void) {
+        print("Retrieving Locally Saved RSI Data")
+        var rsiData: AllRsiData?
+        if let data = UserDefaults.standard.value(forKey: "allRsiData") as? Data {
+            print("SUCCESS: Retrieving Locally Saved RSI Data")
+            rsiData = try? PropertyListDecoder().decode(AllRsiData.self, from: data)
+            print("RSIData: \(rsiData)")
+            completion(rsiData)
+        } else {
+            print("FAILURE: Retrieving Locally Saved RSI Data")
+            completion(rsiData)
+        }
     }
     
 }

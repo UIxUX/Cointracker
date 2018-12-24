@@ -20,5 +20,5 @@ extension UIColor {
     public static var redAlert : UIColor { return UIColor(red: 232/255, green: 72/255, blue: 121/255, alpha: 1.0) }
     public static var blueBubble : UIColor { return UIColor(red: 28/255, green: 57/255, blue: 111/255, alpha: 1.0) }
     public static var lineColor : UIColor { return UIColor(red: 51/255, green: 104/255, blue: 183/255, alpha: 1.0) }
-    
+    public static var neutralColor : UIColor { return UIColor(red: 250/255, green: 255/255, blue: 131/255, alpha: 1.0) }
 }

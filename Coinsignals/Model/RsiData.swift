@@ -9,10 +9,10 @@
 import Foundation
 
 struct AllRsiData: Codable {
-    var projectRsiDict: Dictionary<Project,Rsi>
+    var projectRsiDict: Dictionary<Project,Double>
     
     init() {
-        projectRsiDict = Dictionary<Project,Rsi>()
+        projectRsiDict = Dictionary<Project,Double>()
     }
 }
 
