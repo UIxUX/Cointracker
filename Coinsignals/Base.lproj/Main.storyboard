@@ -49,7 +49,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9T-T3-TRq">
-                                            <rect key="frame" x="126" y="65" width="43" height="26"/>
+                                            <rect key="frame" x="126" y="65" width="33" height="26"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Project">
                                                     <attributes>
@@ -66,6 +66,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="Label">
                                                     <attributes>
+                                                        <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <font key="NSFont" size="24" name="Helvetica-Bold"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
@@ -78,10 +79,10 @@
                                             <color key="backgroundColor" red="1" green="0.0" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="YDm-NA-ggj"/>
-                                                <constraint firstAttribute="width" constant="100" id="ppg-L9-Zkb"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="ppg-L9-Zkb"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="14"/>
-                                            <state key="normal" title="Change">
+                                            <state key="normal" title="▾  Change">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>

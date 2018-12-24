@@ -6,6 +6,7 @@ target 'Coinsignals' do
   use_frameworks!
   pod 'Alamofire', '~> 4.8.0'
   pod 'Charts'
+  pod "Pastel"
   # Pods for Coinsignals
 
 end

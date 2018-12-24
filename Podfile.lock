@@ -3,20 +3,24 @@ PODS:
   - Charts (3.2.1):
     - Charts/Core (= 3.2.1)
   - Charts/Core (3.2.1)
+  - Pastel (0.5.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.8.0)
   - Charts
+  - Pastel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Charts
+    - Pastel
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
+  Pastel: b3dd5b8d612dac06ae7c63c97c45c900829bc139
 
-PODFILE CHECKSUM: e482c915fa56bd124fa9a4046f2c5bdf3bc3892e
+PODFILE CHECKSUM: 7772212e683792a52e3ad5bed3d4bcde9ea6d9d3
 
 COCOAPODS: 1.5.3

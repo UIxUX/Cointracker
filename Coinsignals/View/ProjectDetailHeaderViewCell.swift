@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Pastel
 
 protocol ProjectDetailHeaderViewCellDelegate {
     func notifyProjectChangeButtonPressed()
@@ -17,6 +18,8 @@ class ProjectDetailHeaderViewCell: UITableViewCell {
     @IBOutlet weak var projectLabel: UILabel!
     @IBOutlet weak var projectImageViewLabel: UILabel!
     @IBOutlet weak var projectChangeButton: ForceTouchButton!
+    
+    var pastelView: PastelView!
     
     var delegate: ProjectDetailHeaderViewCellDelegate?
     
@@ -51,10 +54,30 @@ class ProjectDetailHeaderViewCell: UITableViewCell {
         
         projectImageView.applyShadow(intensity: .Strong)
         projectImageView.makeRounded()
+        projectImageView.backgroundColor = .clear
         
         projectChangeButton.backgroundColor = UIColor.blueCardBackground
         projectChangeButton.applyShadow(intensity: .Strong)
         projectChangeButton.makeRounded()
         
+        if pastelView == nil {
+            let pastelView = PastelView(frame: projectImageView.bounds)
+            pastelView.startPastelPoint = .bottomLeft
+            pastelView.endPastelPoint = .topRight
+            pastelView.animationDuration = 3.0
+
+            pastelView.setColors([UIColor(red: 156/255, green: 39/255, blue: 176/255, alpha: 1.0),
+                                  UIColor(red: 255/255, green: 64/255, blue: 129/255, alpha: 1.0),
+                                  UIColor(red: 123/255, green: 31/255, blue: 162/255, alpha: 1.0),
+                                  UIColor(red: 32/255, green: 76/255, blue: 255/255, alpha: 1.0),
+                                  UIColor(red: 32/255, green: 158/255, blue: 255/255, alpha: 1.0),
+                                  UIColor(red: 90/255, green: 120/255, blue: 127/255, alpha: 1.0),
+                                  UIColor(red: 58/255, green: 255/255, blue: 217/255, alpha: 1.0)])
+            
+            pastelView.startAnimation()
+            projectImageView.insertSubview(pastelView, at: 0)
+            pastelView.layer.masksToBounds = true
+            pastelView.makeRounded()
+        }
     }
 }
