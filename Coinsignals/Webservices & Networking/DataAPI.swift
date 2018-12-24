@@ -99,7 +99,6 @@ final class DataAPI {
     }
     
     
-    
     /// - Mark: Simply get Price History for Period
     
     func getExternalPriceHistoryData(project: Project, period: Period, completion: @escaping (([History]) -> Void)) {
